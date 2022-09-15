@@ -1,0 +1,34 @@
+              <div class="cart__subtotal-container cart__row">
+                <div class="cart__row-description">
+                  <p class="h3">{{ 'cart.general.subtotal' | t }}:</p>
+                </div>
+                <p class="h3 cart__subtotal">
+                  <span class="money">
+                    {%
+                      render 'price-element',
+                      price: cart.total_price
+                    %}
+                  </span>
+                </p>
+              </div>
+
+              {%  render 'cart-automatic-discounts' %}
+
+              {% comment %}
+              {% if section.settings.display_savings and total_saving > 0 %}
+                <div class="cart__total-savings cart__row">
+                  <div class="cart__row-description">
+                    <p class="cart">{{ 'layout.general.savings' | t }}:</p>
+                  </div>
+                  <p class="cart__total-discount">
+                    <span class="money">
+                      {% assign total_savings = total_saving | plus: cart.total_discount %}
+                      {%
+                        render 'price-element',
+                        price: total_savings
+                      %}
+                    </span>
+                  </p>
+                </div>
+              {% endif %}
+              {% endcomment %}

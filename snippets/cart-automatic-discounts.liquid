@@ -1,0 +1,66 @@
+{% comment %}
+
+Code created by JadePuma
+Instructions - https://jadepuma.com/blogs/shopify-tutorials/show-savings-in-cart-from-automatic-discounts-gifts-shopify-app
+Last editted - 14Sep22
+ 
+{% endcomment %}
+
+<div data-tbnadhide='NO_DISCOUNT'>
+
+<div class="cart__subtotal-container cart__row">
+  <div class="cart__row-description">
+    <p class="h3">Savings:</p>
+  </div>
+  <p class="h3 money cart__subtotal savings">
+    -<span class="h3 money savings" data-tbnadfield='CART_DISCOUNT' data-tbnaddefault=''></span>
+  </p>
+</div>
+<div class="cart__subtotal-container cart__row">
+  <div class="cart__row-description">
+    <p class="h3">Total:</p>
+  </div>
+  <p class="h3 money cart__subtotal">
+    <span class="h3 money" data-tbnadfield='CART_TOTAL' data-tbnaddefault=''></span>
+  </p>
+</div>
+
+</div>
+
+
+{% style %}
+
+  span.h3 { display: inline-block; }
+  .cart__cost-summary .cart__row { padding-top: 0; }
+  .cart__subtotal-container .h3 { font-weight: 700; }
+  .savings { color: #e75864; }
+
+{% endstyle %}
+
+
+<script>
+
+// identify an element to observe
+const elementToObserve = document.querySelector(".cart__cost-summary");
+
+// create a new instance of `MutationObserver` named `observer`,
+// passing it a callback function
+const observer = new MutationObserver(function() {
+    manageDiscounts()
+});
+
+// call `observe()` on that MutationObserver instance,
+// passing it the element to observe, and the options object
+observer.observe(elementToObserve, {subtree: true, childList: true});
+
+
+function manageDiscounts(){
+  document.querySelectorAll('.cart__subtotal-container').forEach((item, index)=>{
+    if(index > 2){
+      item.remove()
+    }
+  })
+
+} 
+
+</script>
